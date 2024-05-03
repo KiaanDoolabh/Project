@@ -1,18 +1,35 @@
 module lfsr(seed, clk, reset, shift_seed);
 //inputs and outputs for a smaller implementation
-//perhaps 8 or 16 bits
+input logic [7:0] seed;
+input logic clk;
+input logic reset;
+output logic shift_seed;
 
-//your implementation of the LFSR.  Remember that this 
-//implementation has memory so it should be done 
-//with some form of a flip-flop based register
+logic [7:0] lfsr_reg = seed;
 
+always_ff @(posedge clk or posedge reset)
+begin
+    if(reset)
+    lfsr_reg <= seed;
+    else 
+    lfsr_reg <= {lfsr_reg[6:0], lfsr_reg[7]^ lfsr_reg[5]};
+end
+ assign shift_seed = lfsr_reg[0];
 endmodule
 
 module lfsr64 (seed, clk, reset, shift_seed);
 //inputs and outputs for the full seed size (64 bits)
-
-//either build a 64 bit version using your smaller implementation above
-//or use the same methods from the xilinx document to build a full
-//64 bit version
-
+input logic [63:0] seed;
+input logic clk;
+input logic reset;
+output logic shift_seed;
+logic [63:0] lfsr_reg = seed;
+always_ff @(posedge clk or posedge reset)
+begin
+    if(reset)
+    lfsr_reg <= seed;
+    else
+    lfsr_reg <= {lfsr_reg[62:0], lfsr_reg[63] ^ lsr_reg[62]};
+end
+assign shift_seed = lfsr_reg[0];
 endmodule
