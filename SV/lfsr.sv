@@ -29,7 +29,7 @@ begin
     if(reset)
     lfsr_reg <= seed;
     else
-    lfsr_reg <= {lfsr_reg[62:0], lfsr_reg[63] ^ lsr_reg[62]};
+    lfsr_reg <= {lfsr_reg[62:0], lfsr_reg[63] ^ lfsr_reg[62]};
 end
 assign shift_seed = lfsr_reg[0];
 endmodule

@@ -24,13 +24,14 @@ module tb ();
   outputfile = $fopen("results.txt", "w");
 
 	//set up any book keeping variables you may want to use
-      int iterations = 0;
-      int repeat_iterations = 0;
-      int repeat_flag = 0;
+      int iterations;
+      iterations = 0;
+      int repeat_iterations;
+      repeat_iterations = 0;
 
 	//set up a starting seed.  What happens with all 0s?
       reset = 1;
-      assign lfsr_seed = 64'h0412_6424_0034_3C28;
+      lfsr_seed = 64'h0412_6424_0034_3C28;
 
 	//reset your DUT
   #10 reset = 0;
